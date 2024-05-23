@@ -1,55 +1,17 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addLandingPage } from '../store/slices/landingPageSlice';
-import { useRouter } from 'next/router';
-import withAuth from '../utils/withAuth';
-import styles from '../styles/CreateLandingPage.module.css';
+import LandingPageForm from '../components/LandingPageForm';
 
-const CreateLandingPage = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const dispatch = useDispatch();
-  const router = useRouter();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newPage = {
-      id: Date.now(),  // Simple unique ID generation
-      title,
-      description,
-      components: []  // Empty array to start with
-    };
-    dispatch(addLandingPage(newPage));
-    router.push('/');
+const CreatePage = () => {
+  const handleSubmit = (landingPage) => {
+    // Handle submission (e.g., dispatch action to save landing page to Redux store or API)
+    console.log('New Landing Page:', landingPage);
   };
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Create New Landing Page</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label className={styles.label}>Title</label>
-          <input
-            type="text"
-            className={styles.input}
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label className={styles.label}>Description</label>
-          <textarea
-            className={styles.textarea}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className={styles.button}>Create</button>
-      </form>
+    <div className="container">
+      <h1>Create Landing Page</h1>
+      <LandingPageForm onSubmit={handleSubmit} />
     </div>
   );
 };
 
-export default withAuth(CreateLandingPage);
+export default CreatePage;

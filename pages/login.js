@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../store/slices/authSlice';
 import { useRouter } from 'next/router';
-import styles from '../styles/Login.module.css';
+import styles from './Login.module.css';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
